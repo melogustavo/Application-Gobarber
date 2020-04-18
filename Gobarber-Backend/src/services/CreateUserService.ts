@@ -1,4 +1,5 @@
 import { getRepository } from 'typeorm';
+import { hash } from 'bcryptjs';
 import User from '../models/User';
 
 interface RequestDTO {
@@ -18,11 +19,14 @@ class CreateUserService {
     if (checkUserExists) {
       throw Error('Email address already used.');
     }
+
+    const hashedPassword = await hash(password, 8);
+
     // O create do userRepository (que ja vem nele por padrao) vai criar apenas a instancia da nossa classe Usuario mas nao salva no banco
     const user = userRepository.create({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
 
     await userRepository.save(user);
