@@ -1,5 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 import { IconBaseProps } from 'react-icons';
+import { useField } from '@unform/core';
 
 import { Container } from './styles';
 
@@ -12,11 +13,26 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 // Passando o InputProps como parametro para o componente Input
-const Input: React.FC<InputProps> = ({ icon: Icon, ...rest }) => (
-  <Container>
-    {Icon && <Icon size={20} />}
-    <input {...rest} />
-  </Container>
-);
+const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
+  const inputRef = useRef(null);
+  const { fieldName, defaultValue, error, registerField } = useField(name);
 
+  // Para o envio de formulario
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      // Retorna a referencia daquele input para que vc consiga acessar atraves do path
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
+
+  return (
+    <Container>
+      {Icon && <Icon size={20} />}
+      {/* default value seria pra quando vc quiser ja iniciar com algum valor setado */}
+      <input defaultValue={defaultValue} ref={inputRef} {...rest} />
+    </Container>
+  );
+};
 export default Input;
