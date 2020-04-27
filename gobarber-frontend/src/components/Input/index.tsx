@@ -1,4 +1,10 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import React, {
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import { IconBaseProps } from 'react-icons';
 import { useField } from '@unform/core';
 
@@ -14,8 +20,20 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 // Passando o InputProps como parametro para o componente Input
 const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef(null);
+  const [isFocused, setIsfocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { fieldName, defaultValue, error, registerField } = useField(name);
+
+  const handleInputFocus = useCallback(() => {
+    setIsfocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsfocused(false);
+    // Ele vai retornar true ou false de acordo com estar preenchido ou nao
+    setIsFilled(!!inputRef.current?.value);
+  }, []);
 
   // Para o envio de formulario
   useEffect(() => {
@@ -28,10 +46,16 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   }, [fieldName, registerField]);
 
   return (
-    <Container>
+    <Container isFocused={isFocused} isFilled={isFilled}>
       {Icon && <Icon size={20} />}
       {/* default value seria pra quando vc quiser ja iniciar com algum valor setado */}
-      <input defaultValue={defaultValue} ref={inputRef} {...rest} />
+      <input
+        onFocus={handleInputFocus}
+        onBlur={handleInputBlur}
+        defaultValue={defaultValue}
+        ref={inputRef}
+        {...rest}
+      />
     </Container>
   );
 };
