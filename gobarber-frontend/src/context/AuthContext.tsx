@@ -1,5 +1,10 @@
-import React, { createContext, useCallback } from 'react';
+import React, { createContext, useCallback, useState } from 'react';
 import api from '../services/api';
+
+interface AuthState {
+  token: string;
+  user: object;
+}
 
 interface SignInCredentials {
   email: string;
@@ -7,7 +12,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  name: string;
+  user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
 }
 
@@ -17,16 +22,34 @@ export const AuthContext = createContext<AuthContextData>(
 );
 
 export const AuthProvider: React.FC = ({ children }) => {
+  // O que vc esta fazendo nesse state eh criando uma verificacao para que ele verifique se ja existe um token e user no local storage... se tiver ele ja vai iniciar com esses dados.
+  // Essa logica so vai servir pra quando o usuario der um refresh na pagina ou sair e voltar, pra ele nao ter que logar novamente
+  const [data, setData] = useState<AuthState>(() => {
+    const token = localStorage.getItem('@goBarber:token');
+    const user = localStorage.getItem('@goBarber:user');
+
+    if (token && user) {
+      return { token, user: JSON.parse(user) };
+    }
+
+    return {} as AuthState;
+  });
+
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('/sessions', {
       email,
       password,
     });
-    console.log(response.data);
+    const { token, user } = response.data;
+
+    localStorage.setItem('@goBarber:token', token);
+    localStorage.setItem('@goBarber:user', JSON.stringify(user));
+
+    setData({ token, user });
   }, []);
 
   return (
-    <AuthContext.Provider value={{ name: 'Gustavo', signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn }}>
       {children}
     </AuthContext.Provider>
   );
