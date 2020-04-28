@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useState, useContext } from 'react';
 import api from '../services/api';
 
 interface AuthState {
@@ -14,12 +14,11 @@ interface SignInCredentials {
 interface AuthContextData {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 // Esse segundo AuthContext apos o as eh pra burlar a tipagem do TS pois o TS vai ficar reclamando se vc deixar apenas com o  {} vazio, mas pra essa aplicacao nos precisamos justamente disso.
-export const AuthContext = createContext<AuthContextData>(
-  {} as AuthContextData,
-);
+const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 export const AuthProvider: React.FC = ({ children }) => {
   // O que vc esta fazendo nesse state eh criando uma verificacao para que ele verifique se ja existe um token e user no local storage... se tiver ele ja vai iniciar com esses dados.
@@ -48,9 +47,28 @@ export const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@goBarber:token');
+    localStorage.removeItem('@goBarber:user');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    // esse value eh o que vai ser repassado e ai depois acessivel apos vc envolver as rotas com o <AuthProvider></AuthProvider>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+// Esse useAuth eh o que vc vai chamar na pagina ou no componente para conseguir acessar as informacoes de user e signin
+export function useAuth(): AuthContextData {
+  const context = useContext(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
+}
