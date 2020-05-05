@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
-        signIn({
+        await signIn({
           email: data.email,
           password: data.password,
         });
@@ -67,6 +67,8 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(errors);
           return;
         }
+
+        console.log(err);
 
         Alert.alert(
           'Erro na autenticacao',
