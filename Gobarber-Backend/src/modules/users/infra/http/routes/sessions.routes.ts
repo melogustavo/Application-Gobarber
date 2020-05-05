@@ -1,7 +1,7 @@
 // Session = Autenticacao de login
 import { Router } from 'express';
 
-import AuthenticateService from '../services/AuthenticateUserService';
+import AuthenticateService from '@modules/users/services/AuthenticateUserService';
 
 const sessiosRouter = Router();
 
