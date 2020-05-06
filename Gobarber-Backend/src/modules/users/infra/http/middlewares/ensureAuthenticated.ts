@@ -4,7 +4,7 @@ import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
@@ -26,8 +26,8 @@ export default function ensureAutehnticated(
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    // Vc esta forcando o tipo do decoded como TokenPayload que vc criou, porque se nao fizer dessa forma o TS vai dar erro... Sempre que vc precisar forcar o tipo de uma variavel vc pode fazer isso
-    const { sub } = decoded as TokenPayload;
+    // Vc esta forcando o tipo do decoded como ITokenPayload que vc criou, porque se nao fizer dessa forma o TS vai dar erro... Sempre que vc precisar forcar o tipo de uma variavel vc pode fazer isso
+    const { sub } = decoded as ITokenPayload;
 
     request.user = {
       id: sub,
