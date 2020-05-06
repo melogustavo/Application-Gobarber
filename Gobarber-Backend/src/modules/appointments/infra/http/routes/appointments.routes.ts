@@ -7,7 +7,6 @@ import CreateAppointmentsService from '@modules/appointments/services/CreateAppo
 import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 
 const appointmentsRouter = Router();
-const appointmentsRepository = new AppointmentsRepository();
 
 // Isso significa que todas as rotas aqui vao ter que usar o token
 appointmentsRouter.use(ensureAuthenticated);
@@ -18,6 +17,8 @@ appointmentsRouter.use(ensureAuthenticated);
 // });
 
 appointmentsRouter.post('/', async (request, response) => {
+  const appointmentsRepository = new AppointmentsRepository();
+
   const { provider_id, date } = request.body;
 
   const parsedDate = parseISO(date);
