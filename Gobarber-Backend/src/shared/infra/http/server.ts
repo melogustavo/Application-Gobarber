@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 // Esse files eh pra vc conseguir visualizar os avatares
-app.use('/files', express.static(uploadConfig.directory));
+app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
