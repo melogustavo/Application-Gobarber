@@ -3,16 +3,21 @@ import FakeUserRepository from '@modules/users/repositories/fakes/FakeUsersRepos
 import FakeStorageProvider from '@shared/container/providers/StorageProvider/fakes/FakeStorageProvider';
 import UpdateUserAvatarService from './UpdateUserAvatarService';
 
-describe('Update User avatar', () => {
-  it('should add avatar to existing user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
+let fakeUserRepository: FakeUserRepository;
+let fakeStorageProvider: FakeStorageProvider;
+let updateUserAvatarService: UpdateUserAvatarService;
 
-    const updateUserAvatarService = new UpdateUserAvatarService(
+describe('Update User avatar', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    fakeStorageProvider = new FakeStorageProvider();
+
+    updateUserAvatarService = new UpdateUserAvatarService(
       fakeUserRepository,
       fakeStorageProvider,
     );
-
+  });
+  it('should add avatar to existing user', async () => {
     const user = await fakeUserRepository.create({
       email: 'gustavo@email.com',
       name: 'gustavo',
@@ -28,14 +33,6 @@ describe('Update User avatar', () => {
   });
 
   it('should not add avatar to non-existing user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
-    const updateUserAvatarService = new UpdateUserAvatarService(
-      fakeUserRepository,
-      fakeStorageProvider,
-    );
-
     await expect(
       updateUserAvatarService.execute({
         user_id: '123',
@@ -45,16 +42,8 @@ describe('Update User avatar', () => {
   });
 
   it('should delete old avatar when updating new one', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeStorageProvider = new FakeStorageProvider();
-
     // Vc esta espionando o metodo pra verificar se ele foi acionado ou nao... nesse caso vc precisa disso porque nao tem como vc verificar se o deletefile foi acionado
     const deleteFile = jest.spyOn(fakeStorageProvider, 'deleteFile');
-
-    const updateUserAvatarService = new UpdateUserAvatarService(
-      fakeUserRepository,
-      fakeStorageProvider,
-    );
 
     const user = await fakeUserRepository.create({
       email: 'gustavo@email.com',

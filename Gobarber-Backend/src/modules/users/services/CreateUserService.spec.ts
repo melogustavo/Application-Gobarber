@@ -3,16 +3,21 @@ import FakeUserRepository from '@modules/users/repositories/fakes/FakeUsersRepos
 import FakeHashProvider from '@modules/users/providers/HashProvider/fakes/FakeHashProvider';
 import CreateUserService from './CreateUserService';
 
-describe('Create User', () => {
-  it('should create a new user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashProvider = new FakeHashProvider();
+let fakeUserRepository: FakeUserRepository;
+let fakeHashProvider: FakeHashProvider;
+let createUserService: CreateUserService;
 
-    const createUserService = new CreateUserService(
+describe('Create User', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    fakeHashProvider = new FakeHashProvider();
+
+    createUserService = new CreateUserService(
       fakeUserRepository,
       fakeHashProvider,
     );
-
+  });
+  it('should create a new user', async () => {
     const user = await createUserService.execute({
       email: 'gustavo@email.com',
       name: 'gustavo',
@@ -24,14 +29,6 @@ describe('Create User', () => {
   });
 
   it('should not create user if email is already being used by another user', async () => {
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashProvider = new FakeHashProvider();
-
-    const createUserService = new CreateUserService(
-      fakeUserRepository,
-      fakeHashProvider,
-    );
-
     await createUserService.execute({
       email: 'gustavo@email.com',
       name: 'gustavo',
