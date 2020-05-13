@@ -23,6 +23,16 @@ class Appointment {
   @JoinColumn({ name: 'provider_id' })
   provider: User;
 
+  // Essa eh a coluna no banco de dados mesmo
+  @Column()
+  user_id: string;
+
+  // Essa coluna nao eh transferida para o banco de dados... eh mais um relacionamento que existe so no JS na programacao
+  // Informacao do objeto que eh relacionado
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
   @Column('time with time zone')
   date: Date;
 

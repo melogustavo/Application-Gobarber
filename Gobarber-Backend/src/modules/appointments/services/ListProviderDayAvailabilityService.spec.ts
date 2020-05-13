@@ -15,12 +15,14 @@ describe('List Provider Day Availability', () => {
   it('should be able to list the day availability from provider', async () => {
     await fakeAppointmentRepository.create({
       provider_id: 'user',
+      user_id: 'userr',
       date: new Date(2020, 4, 14, 17, 0, 0),
     });
 
     // Esse date aqui eh um mes a menos para dar o mes que vc quer... entao ai no caso vc ta fazendo para o mes 5
     await fakeAppointmentRepository.create({
       provider_id: 'user',
+      user_id: '123456',
       date: new Date(2020, 4, 14, 15, 0, 0),
     });
 
