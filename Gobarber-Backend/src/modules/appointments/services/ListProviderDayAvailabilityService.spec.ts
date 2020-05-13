@@ -18,9 +18,14 @@ describe('List Provider Day Availability', () => {
       date: new Date(2020, 4, 14, 17, 0, 0),
     });
 
+    // Esse date aqui eh um mes a menos para dar o mes que vc quer... entao ai no caso vc ta fazendo para o mes 5
     await fakeAppointmentRepository.create({
       provider_id: 'user',
       date: new Date(2020, 4, 14, 15, 0, 0),
+    });
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 4, 14, 11, 0, 0).getTime();
     });
 
     const availability = await listProviderDayAvailabilityService.execute({
@@ -34,7 +39,7 @@ describe('List Provider Day Availability', () => {
       expect.arrayContaining([
         { hour: 17, available: false },
         { hour: 15, available: false },
-        { hour: 10, available: true },
+        { hour: 10, available: false },
         { hour: 16, available: true },
       ]),
     );
