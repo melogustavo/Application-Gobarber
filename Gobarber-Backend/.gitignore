@@ -3,3 +3,5 @@ node_modules
 # Isso eh para nao subir todos os arquivos de imagem pra o git, mas deixando a pasta tmp ja que ela eh precisa pra salvar os avatares
 tmp/*
 !tmp/.gitkeep
+
+coverage
