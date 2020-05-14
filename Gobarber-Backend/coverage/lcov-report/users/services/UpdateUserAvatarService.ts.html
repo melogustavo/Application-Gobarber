@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.82% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/22</span>
+                <span class='fraction'>22/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.58% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/19</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,31 +118,31 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -161,33 +161,33 @@ interface IRequestDTO {
 &nbsp;
 @injectable()
 class UpdateUserAvatarservice {
-<span class="fstat-no" title="function not covered" >  constructor(</span>
+  constructor(
     @inject('UsersRepository')
-    private <span class="cstat-no" title="statement not covered" >userRepository: IUsersRepository,</span>
+    private userRepository: IUsersRepository,
 &nbsp;
     @inject('StorageProvider')
-    private <span class="cstat-no" title="statement not covered" >storageProvider: IStorageProvider,</span>
+    private storageProvider: IStorageProvider,
   ) {}
 &nbsp;
-<span class="fstat-no" title="function not covered" >  public async e</span>xecute({
-<span class="cstat-no" title="statement not covered" >    user_id,</span>
-<span class="cstat-no" title="statement not covered" >    avatarFilename,</span>
+  public async execute({
+    user_id,
+    avatarFilename,
   }: IRequestDTO): Promise&lt;User&gt; {
-    const <span class="cstat-no" title="statement not covered" >user = <span class="cstat-no" title="statement not covered" >await this.userRepository.findById(user_id);</span></span>
-<span class="cstat-no" title="statement not covered" >    if (!user) {</span>
-<span class="cstat-no" title="statement not covered" >      throw new AppError('Only authenticated user can change avatar', 401);</span>
+    const user = await this.userRepository.findById(user_id);
+    if (!user) {
+      throw new AppError('Only authenticated user can change avatar', 401);
     }
 &nbsp;
-    if (<span class="cstat-no" title="statement not covered" >user.</span>avatar) {
-<span class="cstat-no" title="statement not covered" >      await this.storageProvider.deleteFile(user.avatar);</span>
+    if (user.avatar) {
+      await this.storageProvider.deleteFile(user.avatar);
     }
 &nbsp;
-    const <span class="cstat-no" title="statement not covered" >filename = <span class="cstat-no" title="statement not covered" >await this.storageProvider.saveFile(avatarFilename);</span></span>
+    const filename = await this.storageProvider.saveFile(avatarFilename);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    user.avatar = filename;</span>
-<span class="cstat-no" title="statement not covered" >    await this.userRepository.save(user);</span>
+    user.avatar = filename;
+    await this.userRepository.save(user);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    return user;</span>
+    return user;
   }
 }
 &nbsp;
@@ -199,7 +199,7 @@ export default UpdateUserAvatarservice;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed May 13 2020 17:25:11 GMT-0300 (GMT-03:00)
+                at Wed May 13 2020 17:25:28 GMT-0300 (GMT-03:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>
