@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import { errors } from 'celebrate';
 import 'express-async-errors';
 
 import uploadConfig from '@config/upload';
@@ -19,6 +20,9 @@ app.use(express.json());
 // Esse files eh pra vc conseguir visualizar os avatares
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
+
+// Esse eh o middleware la do celebrate... vc coloca ele antes dos errors handles global para ele pegar qualquer tipo de envio incorreto de dados
+app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {

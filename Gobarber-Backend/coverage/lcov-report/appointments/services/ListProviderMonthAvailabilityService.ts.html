@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">33.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>21/21</span>
+                <span class='fraction'>7/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">16.67% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>1/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">31.58% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/19</span>
+                <span class='fraction'>6/19</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -136,39 +136,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">31x</span>
-<span class="cline-any cline-yes">341x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -192,41 +192,41 @@ type IResponse = Array&lt;{
 &nbsp;
 @injectable()
 class ListProviderMonthAvailabilityService {
-  constructor(
+<span class="fstat-no" title="function not covered" >  constructor(</span>
     @inject('AppointmentsRepository')
-    private appointmentsRepository: IappointmentsRepository,
+    private <span class="cstat-no" title="statement not covered" >appointmentsRepository: IappointmentsRepository,</span>
   ) {}
 &nbsp;
-  public async execute({
-    provider_id,
-    year,
-    month,
+<span class="fstat-no" title="function not covered" >  public async e</span>xecute({
+<span class="cstat-no" title="statement not covered" >    provider_id,</span>
+<span class="cstat-no" title="statement not covered" >    year,</span>
+<span class="cstat-no" title="statement not covered" >    month,</span>
   }: IRequestDTO): Promise&lt;IResponse&gt; {
-    const appointments = await this.appointmentsRepository.findAllInMonthFromProvider(
+    const <span class="cstat-no" title="statement not covered" >appointments = <span class="cstat-no" title="statement not covered" ><span class="branch-0 cbranch-no" title="branch not covered" >await this.appointmentsRepository.findAllInMonthFromProvider(</span></span></span>
       { month, provider_id, year },
     );
 &nbsp;
     // pegar a quantidade de dias
-    const numberOfDaysInMonth = getDaysInMonth(new Date(year, month - 1));
+    const <span class="cstat-no" title="statement not covered" >numberOfDaysInMonth = getDaysInMonth(new Date(year, month - 1));</span>
 &nbsp;
     // Criar um array de acordo com a quantidade de dias
-    const eachDayArray = Array.from(
+    const <span class="cstat-no" title="statement not covered" >eachDayArray = Array.from(</span>
       { length: numberOfDaysInMonth },
-      (_, index) =&gt; index + 1,
+<span class="fstat-no" title="function not covered" >      (_</span>, index) =&gt; <span class="cstat-no" title="statement not covered" >index + 1,</span>
     );
 &nbsp;
-    const availability = eachDayArray.map((day) =&gt; {
-      const appointmentsInDay = appointments.filter((appointment) =&gt; {
-        return getDate(appointment.date) === day;
+    const <span class="cstat-no" title="statement not covered" >availability = eachDayArray.map(<span class="fstat-no" title="function not covered" >(d</span>ay) =&gt; {</span>
+      const appointmentsInDay = <span class="cstat-no" title="statement not covered" >appointments.filter(<span class="fstat-no" title="function not covered" >(a</span>ppointment) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        return getDate(appointment.date) === day;</span>
       });
 &nbsp;
-      return {
+<span class="cstat-no" title="statement not covered" >      return {</span>
         day,
         available: appointmentsInDay.length &lt; 10,
       };
     });
 &nbsp;
-    return availability;
+<span class="cstat-no" title="statement not covered" >    return availability;</span>
   }
 }
 &nbsp;
@@ -238,7 +238,7 @@ export default ListProviderMonthAvailabilityService;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu May 14 2020 09:38:14 GMT-0300 (GMT-03:00)
+                at Thu May 14 2020 10:17:41 GMT-0300 (GMT-03:00)
             </div>
         </div>
         <script src="../../prettify.js"></script>
