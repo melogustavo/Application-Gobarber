@@ -48,7 +48,11 @@ class ListProviderDayAvailabilityService {
 
     const currentDate = new Date(Date.now());
 
+    // Consolidando as informacoes
     const availability = eachHourArray.map((hour) => {
+      // Nos appointments que vc buscou la em cima, o typeORM ta trazendo apenas aquilo que existe no banco de dados...
+      // Nesse metodo acima do .map vc vai ta passando por cada hora que vc criou na mao o array, e ai tentando achar a hour para o appointment... se nao existir nenhum appointment que seja igual a variavle hour (eh o que vem do map) ai ele retorna false, se existir ele retorna true... e ai no final quando vc der o return vc vai inverter o valor delas, para que quando ele encontrar o horario nos appointments ele considerar como false ja que o horario vai estar ocupado
+      // Esse mesmo raciocionio eh o utilizado la no list provider month
       const hasAppointmentInHour = appointments.find(
         (appointment) => getHours(appointment.date) === hour,
       );
