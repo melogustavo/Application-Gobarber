@@ -1,15 +1,20 @@
 import FakeAppointmentRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
 import CreateAppointmentsService from '@modules/appointments/services/CreateAppointmentService';
+import FakeNotificationsRepository from '@modules/notifications/repositories/fakes/FakeNotificationsRepository';
 
 import AppError from '@shared/errors/AppError';
 
 let fakeAppointmentRepository: FakeAppointmentRepository;
+let fakeNotificationsRepository: FakeNotificationsRepository;
 let createAppointment: CreateAppointmentsService;
 describe('CreateAppointment', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentRepository();
+    fakeNotificationsRepository = new FakeNotificationsRepository();
+
     createAppointment = new CreateAppointmentsService(
       fakeAppointmentRepository,
+      fakeNotificationsRepository,
     );
   });
   it('should be able to create a new appointment', async () => {
@@ -36,7 +41,7 @@ describe('CreateAppointment', () => {
       createAppointment.execute({
         date: appointmentDate,
         provider_id: '123456',
-        user_id: '123456',
+        user_id: '123',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
